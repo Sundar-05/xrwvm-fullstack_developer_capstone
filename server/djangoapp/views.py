@@ -99,6 +99,7 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status":400,"message":"Bad Request"})
 
 
+
 def get_dealer_reviews(request, dealer_id):
     # if dealer id has been provided
     if(dealer_id):

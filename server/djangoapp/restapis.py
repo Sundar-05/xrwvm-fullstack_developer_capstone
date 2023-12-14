@@ -1,8 +1,18 @@
 import requests
 import json
 from requests.auth import HTTPBasicAuth
+import os
+from dotenv import load_dotenv
 
-backend_url = "https://ksundararaja-3030.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/"
+load_dotenv()
+
+backend_url = os.getenv(
+    'backend_url', default="http://localhost:3030")
+sentiment_analyzer_url = os.getenv(
+    'sentiment_analyzer_url',
+    default="http://localhost:5050/")
+
+
 
 def get_request(endpoint, **kwargs):
     params = ""
@@ -23,9 +33,8 @@ def get_request(endpoint, **kwargs):
 
    
 def analyze_review_sentiments(text):
-    request_url = "https://sentianalyzer.1aliohlnxe2i.us-south.codeengine.appdomain.cloud/"+"analyze/"+text
+    request_url = sentiment_analyzer_url+"analyze/"+text
     try:
-        print()
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)
         return response.json()
